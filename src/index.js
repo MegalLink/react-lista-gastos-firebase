@@ -2,33 +2,46 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./style.css";
 import App from "./App";
-import WebFont from 'webfontloader'
-import Contenedor from './elementos/Contenedor';
-import {BrowserRouter,Route,Switch} from 'react-router-dom'
-import EditarGasto from './componentes/EditarGasto'
-import GastosPorCategoria from './componentes/GastosPorCategoria'
-import ListaGastos from './componentes/ListaGastos'
-import Login from './componentes/Login'
-import Register from './componentes/Register'
-
-  WebFont.load({
-    google: {
-      families: ['Work Sans:400,500,700', 'sans-serif']
-    }
-  });
+import WebFont from "webfontloader";
+import Contenedor from "./elementos/Contenedor";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import EditarGasto from "./componentes/EditarGasto";
+import GastosPorCategoria from "./componentes/GastosPorCategoria";
+import ListaGastos from "./componentes/ListaGastos";
+import Login from "./componentes/Login";
+import Register from "./componentes/Register";
+import { Helmet } from "react-helmet";
+import Fondo from './elementos/Fondo'
+WebFont.load({
+  google: {
+    families: ["Work Sans:400,500,700", "sans-serif"]
+  }
+});
 
 ReactDOM.render(
-  <BrowserRouter>
-  <Contenedor>
-  <Switch>
-  <Route path="/login" component={Login} />
-  <Route path="/register" component={Register} />
-  <Route path="/lista" component={ListaGastos} />
-  <Route path="/categorias" component={GastosPorCategoria} />
-  <Route path="/editar/:id" component={EditarGasto} />
-  <Route path="/" component={App} />
-  </Switch>
- 
-  </Contenedor>
-  </BrowserRouter>
-  , document.getElementById("root"));
+  <>
+    <Helmet>
+      <meta charSet="utf-8" />
+      <title>App Gastos</title>
+      <link
+        rel="shotcut icon"
+        href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pngwing.com%2Fes%2Ffree-png-yjabd&psig=AOvVaw2c3WIuP5kamUr4os319uw8&ust=1615241684964000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLjHv6man-8CFQAAAAAdAAAAABAD"
+        type="image/png"
+      />
+    </Helmet>
+    <BrowserRouter>
+      <Contenedor>
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/lista" component={ListaGastos} />
+          <Route path="/categorias" component={GastosPorCategoria} />
+          <Route path="/editar/:id" component={EditarGasto} />
+          <Route path="/" component={App} />
+        </Switch>
+      </Contenedor>
+      <Fondo/>
+    </BrowserRouter>
+  </>,
+  document.getElementById("root")
+);
