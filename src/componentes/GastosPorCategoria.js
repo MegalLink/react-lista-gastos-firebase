@@ -1,11 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import {
-  Header,
-  Titulo,
-  ContenedorHeader,
-  ContenedorBotones
-} from "../elementos/Header";
+import { Header, Titulo } from "../elementos/Header";
+import BtnRegresar from "../elementos/BtnRegresar";
 export default function GastosPorCategoria() {
   return (
     <>
@@ -13,9 +9,8 @@ export default function GastosPorCategoria() {
         <title>Gastos por Categoria</title>
       </Helmet>
       <Header>
-        <ContenedorHeader>
-          <Titulo>Agregar Gasto </Titulo>
-        </ContenedorHeader>
+        <BtnRegresar />
+        <Titulo>Gastos por Categoria </Titulo>
       </Header>
     </>
   );

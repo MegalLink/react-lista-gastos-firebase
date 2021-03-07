@@ -17,9 +17,9 @@ export default function App() {
         <ContenedorHeader>
           <Titulo>Agregar Gasto </Titulo>
           <ContenedorBotones>
-          <Boton to="/lista"> Categorías</Boton>
-          <Boton to="/categorias"> Lista Gastos</Boton>
-          <Boton > X</Boton>
+            <Boton to="/lista"> Gastos</Boton>
+            <Boton to="/categorias"> Categorias</Boton>
+            <Boton to="/login"> X</Boton>
           </ContenedorBotones>
         </ContenedorHeader>
       </Header>
