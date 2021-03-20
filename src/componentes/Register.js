@@ -1,26 +1,29 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import {useHistory} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 import { Header, Titulo, ContenedorHeader } from "../elementos/Header";
 import styled from "styled-components";
 import Boton from "../elementos/Boton";
+import Swal from "sweetalert2";
 import {
   Formulario,
   Input,
   ContenedorBoton
 } from "../elementos/ElementosDeFormulario";
-
 import { auth } from "../firebase/firebaseConfig";
+const Swal = require("sweetalert2");
+
 const Imagen = styled.img`
   height: auto;
   width: 200px;
   margin: auto;
 `;
 export default function Register() {
-  const history=useHistory();
+  const history = useHistory();
   const [correo, establecerCorreo] = useState("");
   const [password, establecerPassword] = useState("");
   const [password2, establecerPassword2] = useState("");
+  
   function handleChange(e) {
     switch (e.target.name) {
       case "email":
@@ -38,25 +41,58 @@ export default function Register() {
   }
   async function handleSubmit(e) {
     e.preventDefault();
+
     const er = new RegExp(/[a-zA-Z0-9_.+-]+@\w+\.\w+/);
+    if (correo === "" || password === "" || password2 === "") {   
+      Swal.fire({
+        title: 'Error',
+        text: 'Porfavor llene todos los campos',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      })
+      return; //Sale de la función
+    }
     if (!er.test(correo)) {
-      console.log("Porfavor ingresa un correo electrónico valido");
+      Swal.fire({
+        title: 'Error',
+        text: 'Porfavor ingresa un correo electrónico valido',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      })
+      
       return; //Sale de la función
     }
-    if (correo === "" || password === "" || password2 === "") {
-      console.log("Porfavor llene todos los campos");
-      return; //Sale de la función
-    }
+
     if (password !== password2) {
-      console.log("Las contraseñas no coinciden");
+       Swal.fire({
+        title: 'Error',
+        text: 'Las contraseñas no coinciden',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      })
+      
       return; //Sale de la función
     }
     try {
       await auth.createUserWithEmailAndPassword(correo, password);
-      console.log("Usuario regitrado con exito");
-      history.push('/');
+        Swal.fire({
+        title: 'Exito',
+        text: 'Usuario creado con exito',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 1500
+      }).then(()=>{
+            history.push("/");
+      })
+      
+     
     } catch (err) {
-      console.log(err.message);
+       Swal.fire({
+        title: 'Error',
+        text: err.message,
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      })
     }
   }
   return (
