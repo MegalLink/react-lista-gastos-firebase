@@ -13,10 +13,12 @@ const AuthProvider=({children})=>{
   const [cargando,cambiarCargando]=useState(true);
   //comprobar una sola vez
 useEffect(()=>{
-  auth.onAuthStateChanged((usuario)=>{
+ const cancelarSubscripcion= auth.onAuthStateChanged((usuario)=>{
    cambiarUsuario(usuario);
    cambiarCargando(false);
   });
+  //se ejecuta cuando se cierra sesión
+  return cancelarSubscripcion;
 })
   return (
     <AuthContext.Provider value={{usuario:usuario}}>
