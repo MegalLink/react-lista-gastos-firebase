@@ -12,6 +12,7 @@ import Login from "./componentes/Login";
 import Register from "./componentes/Register";
 import { Helmet } from "react-helmet";
 import Fondo from './elementos/Fondo'
+import {AuthProvider} from './contextos/AuthContext'
 WebFont.load({
   google: {
     families: ["Work Sans:400,500,700", "sans-serif"]
@@ -29,6 +30,7 @@ ReactDOM.render(
         type="image/png"
       />
     </Helmet>
+    <AuthProvider>
     <BrowserRouter>
       <Contenedor>
         <Switch>
@@ -42,6 +44,7 @@ ReactDOM.render(
       </Contenedor>
       <Fondo/>
     </BrowserRouter>
+    </AuthProvider>
   </>,
   document.getElementById("root")
 );
