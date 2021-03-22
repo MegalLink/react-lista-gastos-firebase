@@ -6,7 +6,7 @@ import {useAuth} from '../contextos/AuthContext'
 export default function ListaGastos() {
  
   const {usuario}=useAuth();
- 
+  console.log(usuario)
   return (
     <>
       <Helmet>

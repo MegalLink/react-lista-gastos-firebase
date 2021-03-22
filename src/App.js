@@ -1,5 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import { auth } from "./firebase/firebaseConfig";
+import { useHistory } from "react-router-dom";
 import {
   Header,
   Titulo,
@@ -8,6 +10,17 @@ import {
 } from "./elementos/Header";
 import Boton from "./elementos/Boton";
 export default function App() {
+  const history = useHistory();
+  const cerrarSesion = () => {
+    auth
+      .signOut()
+      .then(() => {
+        history.push("/login");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
   return (
     <>
       <Helmet>
@@ -17,9 +30,18 @@ export default function App() {
         <ContenedorHeader>
           <Titulo>Agregar Gasto </Titulo>
           <ContenedorBotones>
-            <Boton to="/lista"> Gastos <i class="ml fas fa-money-check"></i></Boton>
-            <Boton to="/categorias"> Categorias<i class="ml fas fa-th-list"></i></Boton>
-            <Boton to="/login"> <i class="ml fas fa-sign-out-alt"></i></Boton>
+            <Boton to="/lista">
+              {" "}
+              Gastos <i className="ml fas fa-money-check" />
+            </Boton>
+            <Boton to="/categorias">
+              {" "}
+              Categorias<i className="ml fas fa-th-list" />
+            </Boton>
+            <Boton as="button" to="/login" onClick={cerrarSesion}>
+              {" "}
+              <i className="ml fas fa-sign-out-alt" />
+            </Boton>
           </ContenedorBotones>
         </ContenedorHeader>
       </Header>
