@@ -25,4 +25,4 @@ useEffect(()=>{
         { !cargando &&children}
     </AuthContext.Provider>);
 }
-export {AuthContext,AuthProvider,useAuth};
+export {AuthProvider,useAuth};

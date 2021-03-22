@@ -32,7 +32,7 @@ export default function Login() {
         break;
     }
   }
-  function handleSubmit(e) {
+ async function handleSubmit(e) {
     e.preventDefault();
 
     const er = new RegExp(/[a-zA-Z0-9_.+-]+@\w+\.\w+/);
@@ -55,20 +55,17 @@ export default function Login() {
       
       return; //Sale de la función
     }
-
-   
-    
-     auth.signInWithEmailAndPassword(correo, password).then(
-       ()=>{  history.push("/");}      
-     ).catch((err)=>{
+try{
+await auth.signInWithEmailAndPassword(correo, password)
+ history.push("/")
+}catch(err){
 Swal.fire({
         title: 'Error',
         text: err.message,
         icon: 'error',
         confirmButtonText: 'Ok'
       })
-      })
-       
+}      
       
   } 
     
