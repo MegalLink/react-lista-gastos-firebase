@@ -7,9 +7,11 @@ import {
   ContenedorBoton
 } from "../elementos/ElementosDeFormulario";
 import Boton from "../elementos/Boton";
+import SelectCategorias from './SelectCategorias'
 const FormularioGasto = () => {
   const [descripcion, cambiarDescripcion] = useState("");
   const [cantidad, cambiarCantidad] = useState("");
+  const [categoria,cambiarCategoria]=useState("hogar")
   const handleChange = e => {
     if (e.target.name === "descripcion") {
       cambiarDescripcion(e.target.value);
@@ -23,7 +25,7 @@ const FormularioGasto = () => {
   return (
     <Formulario>
       <ContenedorFiltros>
-        <p>Select</p>
+        <SelectCategorias categoria={categoria} cambiarCategoria={cambiarCategoria}/>
         <p>Date Picker </p>
       </ContenedorFiltros>
       <div>
