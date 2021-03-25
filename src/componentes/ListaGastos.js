@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { Header, Titulo } from "../elementos/Header";
 import BtnRegresar from "../elementos/BtnRegresar";
 import {useAuth} from '../contextos/AuthContext'
+import FormularioGasto from './FormularioGasto'
 export default function ListaGastos() {
  
   const {usuario}=useAuth();
@@ -16,6 +17,8 @@ export default function ListaGastos() {
         <BtnRegresar />
         <Titulo>Lista de Gastos </Titulo>
       </Header>
+      <FormularioGasto/>
+
     </>
   );
 }
