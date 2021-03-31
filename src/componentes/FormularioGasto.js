@@ -48,7 +48,7 @@ const FormularioGasto = () => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Porfavor ingrese el monto del gasto un número positivo"
+        text: "Porfavor ingrese un valor mayor que 0"
       });
     }
   };

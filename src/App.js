@@ -10,6 +10,7 @@ import {
 } from "./elementos/Header";
 import FormularioGasto from "./componentes/FormularioGasto";
 import Boton from "./elementos/Boton";
+import BarraTotalGastado from "./componentes/BarraTotalGasto";
 export default function App() {
   const history = useHistory();
   const cerrarSesion = () => {
@@ -37,21 +38,22 @@ export default function App() {
             <Titulo>Agregar Gasto </Titulo>
             <Boton to="/lista">
               {" "}
-              Gastos <i className="ml fas fa-money-check" />
+              Gastos <i className="ml fas fa-list" />
             </Boton>
             <Boton to="/categorias">
               {" "}
               Categorias
-              <i className="ml fas fa-th-list" />
+              <i className="ml fas fa-home" />
             </Boton>
             <Boton as="button" to="/login" onClick={cerrarSesion}>
-              {" "}
+              Salir
               <i className="ml fas fa-sign-out-alt" />
             </Boton>
           </ContenedorBotones>
         </ContenedorHeader>
       </Header>
       <FormularioGasto />
+      <BarraTotalGastado />
     </>
   );
 }
