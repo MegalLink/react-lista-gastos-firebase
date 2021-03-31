@@ -8,6 +8,7 @@ import {
   ContenedorHeader,
   ContenedorBotones
 } from "./elementos/Header";
+import FormularioGasto from './componentes/FormularioGasto'
 import Boton from "./elementos/Boton";
 export default function App() {
   const history = useHistory();
@@ -28,8 +29,9 @@ export default function App() {
       </Helmet>
       <Header>
         <ContenedorHeader>
-          <Titulo>Agregar Gasto </Titulo>
+         
           <ContenedorBotones>
+           <Titulo>Agregar Gasto </Titulo>
             <Boton to="/lista">
               {" "}
               Gastos <i className="ml fas fa-money-check" />
@@ -45,6 +47,8 @@ export default function App() {
           </ContenedorBotones>
         </ContenedorHeader>
       </Header>
+       <FormularioGasto/>
+
     </>
   );
 }

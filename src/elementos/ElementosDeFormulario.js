@@ -1,16 +1,19 @@
 import styled from 'styled-components';
 import theme from './../theme';
 const ContenedorFiltros = styled.div`
+    
     display: flex;
     justify-content: space-between;
+    margin-top:10rem;
     margin-bottom: 1.87rem; /* 30px */
  
     @media(max-width: 60rem){ /* 950px */
         flex-direction: column;
- 
+         margin-top:0rem;
         & > * {
+          
             width: 100%;
-            margin-bottom: 0.62rem; /* 10px */
+            margin-bottom: 0.62rem;
         }
     }
 `;

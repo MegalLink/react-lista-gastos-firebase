@@ -58,14 +58,14 @@ const Opcion = styled.div`
 
 const SelectCategorias = ({ categoria, cambiarCategoria }) => {
   const categorias = [
-    { id: "comida", texto: "Comida" },
-    { id: "cuentas y pagos", texto: "Cuentas y pagos" },
-    { id: "hogar", texto: "Hogar" },
-    { id: "transporte", texto: "Transporte" },
-    { id: "ropa", texto: "Ropa" },
-    { id: "salud e higiene", texto: "Salud e Higiene" },
-    { id: "compras", texto: "Compras" },
-    { id: "diversion", texto: "Diversion" }
+    { id: "comida", texto: "Comida", icon: "utensils" },
+    { id: "cuentas y pagos", texto: "Cuentas y pagos", icon: "cash-register" },
+    { id: "hogar", texto: "Hogar", icon: "home" },
+    { id: "transporte", texto: "Transporte", icon: "car-side" },
+    { id: "ropa", texto: "Ropa", icon: "utensils" },
+    { id: "salud e higiene", texto: "Salud e Higiene", icon: "tshirt" },
+    { id: "compras", texto: "Compras", icon: "shopping-cart" },
+    { id: "diversion", texto: "Diversion", icon: "futbol" }
   ];
   const [mostrarSelect, cambiarMostrarSelect] = useState(false);
   const handleClick = e => {
@@ -80,7 +80,7 @@ const SelectCategorias = ({ categoria, cambiarCategoria }) => {
     >
       <OpcionSeleccionada>
         {categoria}
-        <i class="fas fa-caret-down" />
+        <i className="fas fa-caret-down" />
       </OpcionSeleccionada>
       {mostrarSelect && (
         <Opciones>
@@ -91,6 +91,7 @@ const SelectCategorias = ({ categoria, cambiarCategoria }) => {
                 data-valor={categoria.id}
                 onClick={handleClick}
               >
+                <i className={"mr fas fa-" + categoria.icon} />
                 {categoria.texto}
               </Opcion>
             );
