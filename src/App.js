@@ -8,7 +8,7 @@ import {
   ContenedorHeader,
   ContenedorBotones
 } from "./elementos/Header";
-import FormularioGasto from './componentes/FormularioGasto'
+import FormularioGasto from "./componentes/FormularioGasto";
 import Boton from "./elementos/Boton";
 export default function App() {
   const history = useHistory();
@@ -19,7 +19,11 @@ export default function App() {
         history.push("/login");
       })
       .catch(err => {
-        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: err
+        });
       });
   };
   return (
@@ -29,16 +33,16 @@ export default function App() {
       </Helmet>
       <Header>
         <ContenedorHeader>
-         
           <ContenedorBotones>
-           <Titulo>Agregar Gasto </Titulo>
+            <Titulo>Agregar Gasto </Titulo>
             <Boton to="/lista">
               {" "}
               Gastos <i className="ml fas fa-money-check" />
             </Boton>
             <Boton to="/categorias">
               {" "}
-              Categorias<i className="ml fas fa-th-list" />
+              Categorias
+              <i className="ml fas fa-th-list" />
             </Boton>
             <Boton as="button" to="/login" onClick={cerrarSesion}>
               {" "}
@@ -47,8 +51,7 @@ export default function App() {
           </ContenedorBotones>
         </ContenedorHeader>
       </Header>
-       <FormularioGasto/>
-
+      <FormularioGasto />
     </>
   );
 }

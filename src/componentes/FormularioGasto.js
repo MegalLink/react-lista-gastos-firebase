@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
+
+import { useAuth } from "../contextos/AuthContext";
+
 import {
   ContenedorFiltros,
   Formulario,
@@ -9,6 +13,7 @@ import {
 import Boton from "../elementos/Boton";
 import SelectCategorias from "./SelectCategorias";
 import DatePicker from "./DatePicker";
+import agregarGastoFire from "../firebase/agregarGastoFire";
 const FormularioGasto = () => {
   const [descripcion, cambiarDescripcion] = useState("");
   const [cantidad, cambiarCantidad] = useState("");
@@ -21,11 +26,34 @@ const FormularioGasto = () => {
       //Todo lo que no sea números remplazarlo por un espacio vacio
       cambiarCantidad(e.target.value.replace(/[^0-9.]/g, ""));
     }
-    console.log(cantidad);
-    console.log(descripcion);
+  };
+  const { usuario } = useAuth();
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (descripcion != "" && cantidad > 0) {
+      agregarGastoFire(categoria, descripcion, cantidad, fecha, usuario.uid);
+      cambiarDescripcion("");
+      cambiarCantidad("");
+      cambiarCategoria("hogar");
+      cambiarFecha(new Date());
+    }
+    if (descripcion == "") {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Porfavor llene el campo de descripción"
+      });
+    }
+    if (cantidad <= 0) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Porfavor ingrese el monto del gasto un número positivo"
+      });
+    }
   };
   return (
-    <Formulario>
+    <Formulario onSubmit={handleSubmit}>
       <ContenedorFiltros>
         <SelectCategorias
           categoria={categoria}
