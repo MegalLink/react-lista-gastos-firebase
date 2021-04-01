@@ -2,14 +2,22 @@ import { db } from "./firebaseConfig";
 import Swal from "sweetalert2";
 import getUnixTime from "date-fns/getUnixTime";
 import fromUnixTime from "date-fns/fromUnixTime";
-const agregarGastoFire = (categoria, descripcion, cantidad, fecha, uid) => {
+const agregarGastoFire = (
+  categoria,
+  descripcion,
+  cantidad,
+  fecha,
+  uid,
+  icono
+) => {
   db.collection("gastos")
     .add({
       categoria,
       descripcion,
       cantidad: parseFloat(cantidad).toFixed(2),
       fecha: getUnixTime(fecha),
-      uid
+      uid,
+      icono
     })
     .then(res => {
       Swal.fire({

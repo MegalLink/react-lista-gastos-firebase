@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import theme from "../theme";
+
 const ContenedorSelect = styled.div`
   background: ${theme.grisClaro};
   cursor: pointer;
@@ -56,7 +57,12 @@ const Opcion = styled.div`
   }
 `;
 
-const SelectCategorias = ({ categoria, cambiarCategoria }) => {
+const SelectCategorias = ({
+  categoria,
+  cambiarCategoria,
+  icono,
+  cambiarIcono
+}) => {
   const categorias = [
     { id: "comida", texto: "Comida", icon: "utensils" },
     { id: "cuentas y pagos", texto: "Cuentas y pagos", icon: "cash-register" },
@@ -69,7 +75,18 @@ const SelectCategorias = ({ categoria, cambiarCategoria }) => {
   ];
   const [mostrarSelect, cambiarMostrarSelect] = useState(false);
   const handleClick = e => {
-    console.log(e.currentTarget.dataset);
+    console.log(e.currentTarget.dataset.valor);
+    const ic = categorias
+      .filter(c => {
+        if (c.id === e.currentTarget.dataset.valor) {
+          return c;
+        }
+      })
+      .map(c => {
+        return c.icon;
+      });
+
+    cambiarIcono(ic[0]);
     cambiarCategoria(e.currentTarget.dataset.valor);
   };
   return (

@@ -17,6 +17,7 @@ import agregarGastoFire from "../firebase/agregarGastoFire";
 const FormularioGasto = () => {
   const [descripcion, cambiarDescripcion] = useState("");
   const [cantidad, cambiarCantidad] = useState("");
+  const [icono,cambiarIcono]=useState("")
   const [categoria, cambiarCategoria] = useState("hogar");
   const [fecha, cambiarFecha] = useState(new Date());
   const handleChange = e => {
@@ -31,11 +32,12 @@ const FormularioGasto = () => {
   const handleSubmit = e => {
     e.preventDefault();
     if (descripcion != "" && cantidad > 0) {
-      agregarGastoFire(categoria, descripcion, cantidad, fecha, usuario.uid);
+      agregarGastoFire(categoria, descripcion, cantidad, fecha, usuario.uid,icono);
       cambiarDescripcion("");
       cambiarCantidad("");
       cambiarCategoria("hogar");
       cambiarFecha(new Date());
+      cambiarIcono("");
     }
     if (descripcion == "") {
       Swal.fire({
@@ -58,6 +60,8 @@ const FormularioGasto = () => {
         <SelectCategorias
           categoria={categoria}
           cambiarCategoria={cambiarCategoria}
+          icono={icono}
+          cambiarIcono={cambiarIcono}
         />
         <DatePicker fecha={fecha} cambiarFecha={cambiarFecha} />
       </ContenedorFiltros>
