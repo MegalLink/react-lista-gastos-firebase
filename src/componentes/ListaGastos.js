@@ -7,6 +7,8 @@ import useObtenerGastos from "../firebase/useObtenerGastos";
 import formatearCantidad from "../pipes/formatearCantidad";
 import { Link } from "react-router-dom";
 import Boton from "../elementos/Boton";
+import { format, fromUnixTime } from "date-fns";
+import { es } from "date-fns/locale";
 import {
   Lista,
   ElementoLista,
@@ -25,7 +27,22 @@ import {
 } from "../elementos/ElementosDeLista";
 export default function ListaGastos() {
   const gastos = useObtenerGastos();
-
+  const formatearFecha = fecha => {
+    return format(fromUnixTime(fecha), "dd 'de' MMMM 'de' yyyy", {
+      locale: es
+    });
+  };
+  const fechaEsIgual = (gastos, indexActual, gasto) => {
+    if (indexActual !== 0) {
+      const fechaActual = formatearFecha(gasto.fecha);
+      const fechaAnterior = formatearFecha(gastos[indexActual - 1].fecha);
+      if (fechaActual === fechaAnterior) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  };
   return (
     <>
       <Helmet>
@@ -36,24 +53,29 @@ export default function ListaGastos() {
         <Titulo>Lista de Gastos </Titulo>
       </Header>
       <Lista>
-        {gastos.map(gasto => {
+        {gastos.map((gasto, index) => {
           return (
-            <ElementoLista key={gasto.id}>
-              <Categoria>
-                <i className={"mr fas fa-" + gasto.icono} />
-                {gasto.categoria}
-              </Categoria>
-              <Descripcion>{gasto.descripcion}</Descripcion>
-              <Valor>{formatearCantidad(gasto.cantidad)}</Valor>
-              <ContenedorBotones>
-                <BotonAccion as={Link} to={`editar/${gasto.id}`}>
-                  <i className="fas fa-pencil-alt" />
-                </BotonAccion>
-                <BotonAccion>
-                  <i className="fas fa-trash-alt" />
-                </BotonAccion>
-              </ContenedorBotones>
-            </ElementoLista>
+            <div key={gasto.id}>
+              {!fechaEsIgual(gastos, index, gasto) && (
+                <Fecha>{formatearFecha(gasto.fecha)}</Fecha>
+              )}
+              <ElementoLista>
+                <Categoria>
+                  <i className={"mr fas fa-" + gasto.icono} />
+                  {gasto.categoria}
+                </Categoria>
+                <Descripcion>{gasto.descripcion}</Descripcion>
+                <Valor>{formatearCantidad(gasto.cantidad)}</Valor>
+                <ContenedorBotones>
+                  <BotonAccion as={Link} to={`editar/${gasto.id}`}>
+                    <i className="fas fa-pencil-alt" />
+                  </BotonAccion>
+                  <BotonAccion>
+                    <i className="fas fa-trash-alt" />
+                  </BotonAccion>
+                </ContenedorBotones>
+              </ElementoLista>
+            </div>
           );
         })}
         <ContenedorBotonCentral>

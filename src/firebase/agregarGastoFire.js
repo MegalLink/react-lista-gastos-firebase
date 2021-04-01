@@ -1,7 +1,7 @@
 import { db } from "./firebaseConfig";
 import Swal from "sweetalert2";
 import getUnixTime from "date-fns/getUnixTime";
-import fromUnixTime from "date-fns/fromUnixTime";
+
 const agregarGastoFire = (
   categoria,
   descripcion,
