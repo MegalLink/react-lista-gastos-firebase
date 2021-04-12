@@ -26,7 +26,7 @@ import {
   Subtitulo
 } from "../elementos/ElementosDeLista";
 export default function ListaGastos() {
-  const gastos = useObtenerGastos();
+  const [gastos, obtenerMasGastos, hayMasPorCargar] = useObtenerGastos();
   const formatearFecha = fecha => {
     return format(fromUnixTime(fecha), "dd 'de' MMMM 'de' yyyy", {
       locale: es
@@ -78,9 +78,14 @@ export default function ListaGastos() {
             </div>
           );
         })}
-        <ContenedorBotonCentral>
-          <BotonCargarMas>Cargar más</BotonCargarMas>
-        </ContenedorBotonCentral>
+        {hayMasPorCargar && (
+          <ContenedorBotonCentral>
+            <BotonCargarMas onClick={() => obtenerMasGastos()}>
+              Cargar más
+            </BotonCargarMas>
+          </ContenedorBotonCentral>
+        )}
+
         {gastos.length == 0 && (
           <ContenedorSubtitulo>
             <Subtitulo>No hay gastos por mostrar</Subtitulo>
