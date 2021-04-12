@@ -12,8 +12,6 @@ import { es } from "date-fns/locale";
 import {
   Lista,
   ElementoLista,
-  ListaDeCategorias,
-  ElementoListaCategorias,
   Categoria,
   Descripcion,
   Valor,
@@ -25,6 +23,7 @@ import {
   ContenedorSubtitulo,
   Subtitulo
 } from "../elementos/ElementosDeLista";
+import borrarGastoFire from "../firebase/borrarGastoFire";
 export default function ListaGastos() {
   const [gastos, obtenerMasGastos, hayMasPorCargar] = useObtenerGastos();
   const formatearFecha = fecha => {
@@ -70,7 +69,7 @@ export default function ListaGastos() {
                   <BotonAccion as={Link} to={`editar/${gasto.id}`}>
                     <i className="fas fa-pencil-alt" />
                   </BotonAccion>
-                  <BotonAccion>
+                  <BotonAccion onClick={() => borrarGastoFire(gasto.id)}>
                     <i className="fas fa-trash-alt" />
                   </BotonAccion>
                 </ContenedorBotones>
