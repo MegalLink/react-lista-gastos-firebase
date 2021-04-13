@@ -10,8 +10,6 @@ const editarGastoFire = (
   fecha,
   icono
 ) => {
-  console.log("Fecha Fire no format", fecha);
-  console.log("Fecha Fire", getUnixTime(fecha));
   db.collection("gastos")
     .doc(id)
     .update({

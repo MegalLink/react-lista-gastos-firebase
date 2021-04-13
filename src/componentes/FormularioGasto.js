@@ -26,7 +26,7 @@ const FormularioGasto = ({ gasto, id }) => {
 
   useEffect(() => {
     if (gasto) {
-      console.log("Gasto form", fromUnixTime(gasto.fecha));
+      // console.log("Gasto form", fromUnixTime(gasto.fecha));
       if (gasto.uid === usuario.uid) {
         cambiarCategoria(gasto.categoria);
         cambiarDescripcion(gasto.descripcion);
@@ -45,14 +45,12 @@ const FormularioGasto = ({ gasto, id }) => {
       //Todo lo que no sea números remplazarlo por un espacio vacio
       cambiarCantidad(e.target.value.replace(/[^0-9.]/g, ""));
     }
-    
   };
 
   const handleSubmit = e => {
     e.preventDefault();
     if (descripcion != "" && cantidad > 0) {
       if (gasto && id) {
-        console.log("Fecha from with gasto",fecha)
         editarGastoFire(id, categoria, descripcion, cantidad, fecha, icono);
         history.push("/lista");
       } else {
