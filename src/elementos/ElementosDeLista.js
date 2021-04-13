@@ -47,7 +47,7 @@ const ListaDeCategorias = styled.ul`
 `;
 
 const ElementoListaCategorias = styled.li`
-  padding: 1.25rem 0; /* 20px */
+  padding: 1.25rem 2.5rem; /* 20px */
   border-bottom: 2px solid #f2f2f2;
   display: flex;
   justify-content: space-between;

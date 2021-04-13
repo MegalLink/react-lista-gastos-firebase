@@ -7,6 +7,8 @@ const useObtenerGastosMesCategoria = () => {
 const sumaGastos= gastos.reduce((total={},gasto)=>{
    var cantidadActual=gasto.cantidad
    var categoriaActual=gasto.categoria
+   var iconoActual=gasto
+   
    total[categoriaActual]+=Number(cantidadActual)
    return total
   },{

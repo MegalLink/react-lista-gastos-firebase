@@ -43,7 +43,7 @@ export default function App() {
             <Boton to="/categorias">
               {" "}
               Categorias
-              <i className="ml fas fa-home" />
+              <i class="ml far fa-calendar-alt" />
             </Boton>
             <Boton as="button" to="/login" onClick={cerrarSesion}>
               Salir
