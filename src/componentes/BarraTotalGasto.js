@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import theme from "../theme";
 import formatearCantidad from "../pipes/formatearCantidad";
+import { useTotalDelMes } from "../contextos/TotalGastoMensualContext";
 const BarraTotal = styled.div`
   background: ${theme.verde};
   font-size: 1.25rem; /* 20px */
@@ -21,10 +22,12 @@ const BarraTotal = styled.div`
   }
 `;
 const BarraTotalGastado = () => {
+  const { total } = useTotalDelMes();
+
   return (
     <BarraTotal>
       <p>Total gastado en el mes: </p>
-      <p>{formatearCantidad("0.00")}</p>
+      <p>{formatearCantidad(total)}</p>
     </BarraTotal>
   );
 };

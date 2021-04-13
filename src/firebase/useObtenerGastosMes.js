@@ -16,14 +16,14 @@ const useObtenerGastosMes = () => {
         .where("fecha", "<=", finDeMes)
         .where("uid", "==", usuario.uid)
         .onSnapshot(snapshot => {
-          cambiarGastos(
-            snapshot.docs.map(sna => {
-              return { ...sna.data(), id: sna.id };
-            })
-          );
+          const g = snapshot.docs.map(sna => {
+            return { ...sna.data(), id: sna.id };
+          });
+          cambiarGastos(g);
         });
       return unsusbscribe;
     }
   }, [usuario]);
+  return gastos;
 };
 export default useObtenerGastosMes;

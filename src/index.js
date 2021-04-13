@@ -14,6 +14,7 @@ import { Helmet } from "react-helmet";
 import Fondo from "./elementos/Fondo";
 import { AuthProvider } from "./contextos/AuthContext";
 import RutaPrivada from "./componentes/RutaPrivada";
+import { TotalGastadoProvider } from "./contextos/TotalGastoMensualContext";
 WebFont.load({
   google: {
     families: ["Work Sans:400,500,700", "sans-serif"]
@@ -32,27 +33,29 @@ ReactDOM.render(
       />
     </Helmet>
     <AuthProvider>
-      <BrowserRouter>
-        <Contenedor>
-          <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-            <RutaPrivada path="/lista">
-              <ListaGastos />
-            </RutaPrivada>
-            <RutaPrivada path="/categorias">
-              <GastosPorCategoria />
-            </RutaPrivada>
-            <RutaPrivada path="/editar/:id">
-              <EditarGasto />
-            </RutaPrivada>
-            <RutaPrivada path="/">
-              <App />
-            </RutaPrivada>
-          </Switch>
-        </Contenedor>
-        <Fondo />
-      </BrowserRouter>
+      <TotalGastadoProvider>
+        <BrowserRouter>
+          <Contenedor>
+            <Switch>
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
+              <RutaPrivada path="/lista">
+                <ListaGastos />
+              </RutaPrivada>
+              <RutaPrivada path="/categorias">
+                <GastosPorCategoria />
+              </RutaPrivada>
+              <RutaPrivada path="/editar/:id">
+                <EditarGasto />
+              </RutaPrivada>
+              <RutaPrivada path="/">
+                <App />
+              </RutaPrivada>
+            </Switch>
+          </Contenedor>
+          <Fondo />
+        </BrowserRouter>
+      </TotalGastadoProvider>
     </AuthProvider>
   </>,
   document.getElementById("root")
