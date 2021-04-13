@@ -29,7 +29,11 @@ const agregarGastoFire = (
       });
     })
     .catch(err => {
-      console.error(err);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "No se pudo agregar el gasto"
+      });
     });
 };
 export default agregarGastoFire;

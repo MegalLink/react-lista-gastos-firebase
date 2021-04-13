@@ -3,6 +3,7 @@ import styled from "styled-components";
 import theme from "../theme";
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
+import getUnixTime from "date-fns/getUnixTime";
 import MomentLocaleUtils, {
   formatDate,
   parseDate
@@ -35,9 +36,14 @@ const ContenedorInput = styled.div`
 `;
 
 const DatePicker = ({ fecha, cambiarFecha }) => {
+  const handleDayChange = (selectedDay, modifiers, dayPickerInput) => {
+   
+    cambiarFecha(selectedDay);
+  };
   return (
     <ContenedorInput>
       <DayPickerInput
+        onDayChange={handleDayChange}
         value={fecha}
         formatDate={formatDate}
         parseDate={parseDate}
