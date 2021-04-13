@@ -5,6 +5,8 @@ import BtnRegresar from "../elementos/BtnRegresar";
 import BarraTotalGastado from "./BarraTotalGasto";
 
 export default function GastosPorCategoria() {
+  
+  console.log(gastos);
   return (
     <>
       <Helmet>
