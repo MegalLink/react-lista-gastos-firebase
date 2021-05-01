@@ -11,7 +11,6 @@ import {
   ContenedorBoton
 } from "../elementos/ElementosDeFormulario";
 import { auth } from "../firebase/firebaseConfig";
-const Swal = require("sweetalert2");
 
 const Imagen = styled.img`
   height: auto;
@@ -23,7 +22,7 @@ export default function Register() {
   const [correo, establecerCorreo] = useState("");
   const [password, establecerPassword] = useState("");
   const [password2, establecerPassword2] = useState("");
-  
+
   function handleChange(e) {
     switch (e.target.name) {
       case "email":
@@ -43,56 +42,54 @@ export default function Register() {
     e.preventDefault();
 
     const er = new RegExp(/[a-zA-Z0-9_.+-]+@\w+\.\w+/);
-    if (correo === "" || password === "" || password2 === "") {   
+    if (correo === "" || password === "" || password2 === "") {
       Swal.fire({
-        title: 'Error',
-        text: 'Porfavor llene todos los campos',
-        icon: 'error',
-        confirmButtonText: 'Ok'
-      })
+        title: "Error",
+        text: "Porfavor llene todos los campos",
+        icon: "error",
+        confirmButtonText: "Ok"
+      });
       return; //Sale de la función
     }
     if (!er.test(correo)) {
       Swal.fire({
-        title: 'Error',
-        text: 'Porfavor ingresa un correo electrónico valido',
-        icon: 'error',
-        confirmButtonText: 'Ok'
-      })
-      
+        title: "Error",
+        text: "Porfavor ingresa un correo electrónico valido",
+        icon: "error",
+        confirmButtonText: "Ok"
+      });
+
       return; //Sale de la función
     }
 
     if (password !== password2) {
-       Swal.fire({
-        title: 'Error',
-        text: 'Las contraseñas no coinciden',
-        icon: 'error',
-        confirmButtonText: 'Ok'
-      })
-      
+      Swal.fire({
+        title: "Error",
+        text: "Las contraseñas no coinciden",
+        icon: "error",
+        confirmButtonText: "Ok"
+      });
+
       return; //Sale de la función
     }
     try {
       await auth.createUserWithEmailAndPassword(correo, password);
-        Swal.fire({
-        title: 'Exito',
-        text: 'Usuario creado con exito',
-        icon: 'success',
+      Swal.fire({
+        title: "Exito",
+        text: "Usuario creado con exito",
+        icon: "success",
         showConfirmButton: false,
         timer: 1500
-      }).then(()=>{
-            history.push("/");
-      })
-      
-     
+      }).then(() => {
+        history.push("/");
+      });
     } catch (err) {
-       Swal.fire({
-        title: 'Error',
+      Swal.fire({
+        title: "Error",
         text: err.message,
-        icon: 'error',
-        confirmButtonText: 'Ok'
-      })
+        icon: "error",
+        confirmButtonText: "Ok"
+      });
     }
   }
   return (
