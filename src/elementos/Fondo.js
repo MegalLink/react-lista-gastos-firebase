@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Svg = styled.svg`
-  height: 47vh;
+  height: auto%;
   width: 100%;
   position: fixed;
   bottom: 0;
@@ -10,7 +10,6 @@ const Svg = styled.svg`
   path {
     fill: #d38312;
   }
-  
 `;
 const Fondo = () => {
   return (
